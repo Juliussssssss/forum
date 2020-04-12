@@ -9,9 +9,9 @@
                 <form method="POST" class="input-group mb-3" action="{{ route('search') }}">
                     @method('GET')
                     @csrf
-                    <input class="form-control rounded-left" type="text" id="search" name="search" placeholder="Search" value="{{ $answer['search'] }}">
+                    <input class="form-control rounded-left" type="text" id="search" name="search" placeholder="Поиск" value="{{ $answer['search'] }}">
                     <div class="input-group-append">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        <button class="btn btn-outline-success my-sm-0" type="submit">Поиск</button>
                     </div>
                 </form>
             </div>

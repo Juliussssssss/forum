@@ -132,7 +132,6 @@ class PostController extends Controller
     {
         $item = $this->forumPostRepository->getEdit($id);
         $data = $request->all();
-
         if ($this->forumPostRepository->Owner($id)) {
             $result = $item->update($data);
 
@@ -162,11 +161,13 @@ class PostController extends Controller
             $result = ForumPost::destroy($id);
             if ($result) {
 
-                return back()
+                return redirect()
+                    ->route('forum.categories')
                     ->with(['success' => 'Запись удалена']);
             } else {
 
-                return back()
+                return redirect()
+                    ->route('forum.categories')
                     ->withErrors(['msg' => 'Ошибка удаления']);
             }
         } else {

@@ -21,7 +21,7 @@ $( document ).ready(function() {
         $('html').animate({scrollTop: destination}, 1100);
         $('#cancelEditing').attr('hidden', false);
         $('#send').html('Отредактировать');
-        $('#comment').html((($(event.target).parents('li')).siblings('#commentContent')).html());
+        $('#comment').html($(event.target).parents('li').siblings().children('#commentContent').text());
         $('#cancelAnswer').attr('hidden', true);
     });
 
@@ -29,6 +29,7 @@ $( document ).ready(function() {
         $('form').attr('action', 'http://forum/forum/comment');
         $("input[name = '_method']").attr('value', 'POST');
         $('#cancelEditing').attr('hidden', true);
+        $('#send').html('Отправить');
         $('#post_id_answer').attr('value', 0);
         $('#comment').html('');
     });

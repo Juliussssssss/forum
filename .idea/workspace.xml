@@ -7,7 +7,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution>
       <executable />
@@ -124,20 +124,20 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/lang/ru" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\programs\OSPanel\domains\forum1\resources" />
-      <recent name="D:\programs\OSPanel\domains\forum1\public\css" />
-      <recent name="D:\programs\OSPanel\domains\forum1\public\js" />
-      <recent name="D:\programs\OSPanel\domains\forum1\database" />
-      <recent name="D:\programs\OSPanel\domains\forum1\app" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\programs\OSPanel\domains\forum1\resources" />
       <recent name="D:\programs\OSPanel\domains\forum1\app" />
       <recent name="D:\programs\OSPanel\domains\forum1\app\Models" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\programs\OSPanel\domains\forum\resources\lang\ru" />
+      <recent name="D:\programs\OSPanel\domains\forum1\resources" />
+      <recent name="D:\programs\OSPanel\domains\forum1\public\css" />
+      <recent name="D:\programs\OSPanel\domains\forum1\public\js" />
+      <recent name="D:\programs\OSPanel\domains\forum1\database" />
     </key>
   </component>
   <component name="RunManager">
@@ -169,6 +169,9 @@
       <option name="presentableId" value="Default" />
       <updated>1586691867664</updated>
       <workItem from="1586691874974" duration="2791000" />
+      <workItem from="1586705555146" duration="8742000" />
+      <workItem from="1586724028028" duration="957000" />
+      <workItem from="1586725245613" duration="4050000" />
     </task>
     <servers />
   </component>

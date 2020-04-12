@@ -98,8 +98,9 @@ class UserController extends Controller
         $data = $request->all();
 
         if (!empty($request->image)) {
-            $path = $request->file('image')->store('uploads\user photo', 'public');
+            $path = $request->file('image')->store('uploads/user photo', 'public');
             $data['image'] = $path;
+            dd($path);
         }
 
         $result = $item->update($data);

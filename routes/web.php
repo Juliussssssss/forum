@@ -64,6 +64,6 @@ Route::group(['namespace' => 'Forum', 'prefix' => 'forum'], function() {
         ->middleware('verified', 'auth');
     Route::get('post/create/{id}', 'PostController@create')->name('forum.post.create');
 });
-Route::resource('/user','User\userController')->names('user');
+Route::resource('/user','User\UserController')->names('user');
 Route::get('/search', 'Forum\SearchController')->name('search');
 

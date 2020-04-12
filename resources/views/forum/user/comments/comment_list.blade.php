@@ -22,7 +22,7 @@
                                     @endif
                                     <span id="commentContent">{{ $comment->comment }}</span>
                                 </li>
-                                <li id="commentContent" class="w-100 list-group-item bd-highlight border-0 text-center">
+                                <li class="w-100 list-group-item bd-highlight border-0 text-center">
                                     <span class="pl-3 px-1 small d-block d-md-inline">Опубликовано: {{ $comment->created_at }}</span>
                                     @if ($comment->created_at != $comment->updated_at)
                                         <span class="px-1 pl-3 small">Отредактировано: {{ $comment->updated_at }}</span>
