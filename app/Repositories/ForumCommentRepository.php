@@ -20,6 +20,12 @@ class ForumCommentRepository extends CoreRepository
         return Model::class;
     }
 
+    /**
+     * get all post comments
+     *
+     * @param $id
+     * @return mixed
+     */
     public function getComments($id)
     {
         $columns = [
@@ -37,10 +43,38 @@ class ForumCommentRepository extends CoreRepository
         return $result;
     }
 
+    /**
+     * get editing data
+     *
+     * @param $id
+     * @return mixed
+     */
     public function getEdit($id)
     {
         return $this
             ->startConditions()
             ->find($id);
+    }
+
+    /**
+     * check owner comments
+     *
+     * @param $id
+     * @return bool
+     */
+    public function owner($id)
+    {
+        $owner = $this
+            ->startConditions()
+            ->select('user_id')
+            ->where('id', $id)
+            ->get()
+            ->first();
+
+        if($owner->user_id == auth()->user()->id || auth()->user()->is_admin == 1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

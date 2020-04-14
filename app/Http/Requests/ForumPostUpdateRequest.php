@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ForumPostUpdateRequest extends FormRequest
 {
@@ -24,7 +25,12 @@ class ForumPostUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|min:5|max:200',
+            'title' => [
+                'required',
+                'min:5',
+                'max:200',
+                Rule::unique('forum_posts')->ignore($this->route('post'))
+                ],
             'slug' => 'max:200',
             'excerpt' => 'max:200',
             'content_row' => 'required|string|min:5|max:500',

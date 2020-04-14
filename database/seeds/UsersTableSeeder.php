@@ -17,11 +17,17 @@ class UsersTableSeeder extends Seeder
                 'name' => 'Juliusss',
                 'email' => '2000ulik@gmail.com',
                 'password' => bcrypt('secret'),
+                'is_admin' => 1,
+                'email_verified_at' => \Carbon\Carbon::now(),
+                'created_at' => \Carbon\Carbon::now()
             ],
             [
                 'name' => 'Juliusss2',
                 'email' => 'terminatorexpert@gmail.com',
                 'password' => bcrypt('secret'),
+                'is_admin' => 0,
+                'email_verified_at' => null,
+                'created_at' => \Carbon\Carbon::now()
             ]
         ];
 

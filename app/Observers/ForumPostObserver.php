@@ -19,7 +19,10 @@ class ForumPostObserver
     }
 
     /**
+     * Handle the forum post "creating" event.
+     *
      * @param ForumPost $forumPost
+     * @return void
      */
     public function creating(ForumPost $forumPost)
     {
@@ -32,23 +35,6 @@ class ForumPostObserver
         };
     }
 
-    /*
-     * set content HTML regaeding content row
-     *
-     * @param ForumPost $forumPost
-     */
-    protected function setHtml(ForumPost $forumPost)
-    {
-        if ($forumPost->isDirty('content_row')) {
-            $forumPost->content_html = $forumPost->content_row;
-        }
-    }
-
-    protected function setUser(ForumPost $forumPost)
-    {
-        $forumPost->user_id = auth()->id() ?? ForumPost::UNKNOWN_USER;
-    }
-
     /**
      * Handle the forum post "updated" event.
      *
@@ -57,8 +43,15 @@ class ForumPostObserver
      */
     public function updated(ForumPost $forumPost)
     {
+        //
     }
 
+    /**
+     * Handle the forum post "updating" event.
+     *
+     * @param ForumPost $forumPost
+     * @return void
+     */
     public function updating(ForumPost $forumPost)
     {
         $this->checkChangeCategory($forumPost);
@@ -66,38 +59,7 @@ class ForumPostObserver
         $this->setSlug($forumPost);
     }
 
-    protected function checkChangeCategory(ForumPost $forumPost)
-    {
-        if (!auth()->user()->is_admin) {
-            $forumPost->category_id = $forumPost->getOriginal('category_id');
-        }
-    }
 
-    /**
-     * if post is publihsed - set data when we do it
-     *
-     * @param ForumPost $forumPost
-     */
-    protected function setPublishedAt(ForumPost $forumPost)
-    {
-        if (empty($this->published_at) &&  $forumPost['is_published']) {
-            $forumPost['published_at'] = Carbon::now();
-        } else {
-            $forumPost['published_at'] = NULL;
-        }
-    }
-
-    /**
-     * if slug empty set convertation of title
-     *
-     * @param ForumPost $forumPost
-     */
-    protected function setSlug(ForumPost $forumPost)
-    {
-        if (empty($forumPost['slug'])) {
-            $forumPost['slug'] = str_slug($forumPost['title']);
-        }
-    }
     /**
      * Handle the forum post "deleted" event.
      *
@@ -129,5 +91,69 @@ class ForumPostObserver
     public function forceDeleted(ForumPost $forumPost)
     {
         //
+    }
+
+    /**
+     * set content HTML regaeding content row
+     *
+     * @param ForumPost $forumPost
+     * @return void
+     */
+    protected function setHtml(ForumPost $forumPost)
+    {
+        if ($forumPost->isDirty('content_row')) {
+            $forumPost->content_html = $forumPost->content_row;
+        }
+    }
+
+    /**
+     * set author name
+     *
+     * @param ForumPost $forumPost
+     *
+     */
+    protected function setUser(ForumPost $forumPost)
+    {
+        $forumPost->user_id = auth()->id() ?? ForumPost::UNKNOWN_USER;
+    }
+
+    /**
+     * category change protection
+     *
+     * @param ForumPost $forumPost
+     * @return void
+     */
+    protected function checkChangeCategory(ForumPost $forumPost)
+    {
+        if (!auth()->user()->is_admin) {
+            $forumPost->category_id = $forumPost->getOriginal('category_id');
+        }
+    }
+
+    /**
+     * if post is publihsed - set data when we do it
+     *
+     * @param ForumPost $forumPost
+     * @return void
+     */
+    protected function setPublishedAt(ForumPost $forumPost)
+    {
+        if (empty($this->published_at) &&  $forumPost['is_published']) {
+            $forumPost['published_at'] = Carbon::now();
+        } else {
+            $forumPost['published_at'] = NULL;
+        }
+    }
+
+    /**
+     * if slug empty set convertation of title
+     *
+     * @param ForumPost $forumPost
+     */
+    protected function setSlug(ForumPost $forumPost)
+    {
+        if (empty($forumPost['slug'])) {
+            $forumPost['slug'] = str_slug($forumPost['title']);
+        }
     }
 }

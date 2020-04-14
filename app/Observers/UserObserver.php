@@ -19,40 +19,48 @@ class UserObserver
         $this->setTime = Carbon::createFromTimestamp(1);
     }
 
-    public function create(User $request)
+    /**
+     * Handle the user "created" event.
+     *
+     * @param User $request
+     * @return void
+     */
+    public function created(User $request)
     {
         $this->hashPass($request);
     }
 
-    public function hashPass(User $request)
-    {
-
-        $request->password = Hash::make($request->password);
-    }
-
+    /**
+     * Handle the user "creating" event.
+     *
+     * @param User $request
+     * @return void
+     */
     public function creating(User $request)
     {
         $this->setEmailVerification($request);
         $this->hashPass($request);
     }
 
-    public function setEmailVerification(User $request)
-    {
-        if ($this->unsetTime != $request->email_verified_at) {
-            $request->email_verified_at = Carbon::now();
-        }
-            $request->email_verified_at = Null;
-    }
-
+    /**
+     * Handle the user "updating" event.
+     *
+     * @param User $request
+     * @return void
+     */
     public function updating(User $request)
     {
-        $this->setName($request);
-        $this->setEmail($request);
         $this->setImage($request);
         $this->setPassword($request);
         $this->setEmailVerificationAdmin($request);
     }
 
+    /**
+     * function for flag tracking and verification assignment
+     *
+     * @param User $request
+     * @return void
+     */
     public function setEmailVerificationAdmin(User $request)
     {
         if ($this->unsetTime == $request->email_verified_at) {
@@ -64,36 +72,45 @@ class UserObserver
         }
     }
 
+    /**
+     * hash new password or appropriate old
+     *
+     * @param User $request
+     * @return void
+     */
     public function setPassword(User $request)
     {
         if(!$request->password) {
-            $request->password = $request->getOriginal('password');
+            $request->password = Hash::make($request->password);
         } else {
-            $this->hashPass($request);
+            $request->password = $request->getOriginal('password');
         }
     }
 
+    /**
+     * set original photo
+     *
+     * @param User $request
+     * @return void
+     */
     public function setImage(User $request)
     {
         if (!$request->image)
             $request->image = $request->getOriginal('image');
     }
 
-    public function setName(User $request)
+    /**
+     * change verification attribute for new email
+     *
+     * @param User $request
+     * @return void
+     */
+    public function setEmailVerification(User $request)
     {
-        if (strlen($request->name)<=5 && strlen($request->name)!= 0) {
-            $this->answer = false;
-            return back()
-                ->withErrors(['1' => 'Имя короче 5 символов']);
+        if ($this->unsetTime != $request->email_verified_at) {
+            $request->email_verified_at = Carbon::now();
         }
-         if (!$request->name)
-             $request->name = $request->getOriginal('name');
+        $request->email_verified_at = Null;
     }
 
-    public function setEmail(User $request)
-    {
-        if (!$request->email)
-            $request->email = $request->getOriginal('email');
-        else $request->email_verified_at = null;
-    }
 }

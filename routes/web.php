@@ -55,15 +55,16 @@ Route::group(['namespace' => 'Forum', 'prefix' => 'forum'], function() {
     //for comment
     Route::resource('comment', 'CommentController')
         ->names('forum.comment')
-        ->middleware('verified', 'auth')
-        ->only('update', 'store', 'destroy');
+        ->only('update', 'store', 'destroy')
+        ->middleware(['auth', 'verified']);
     //for post
     Route::resource('post', 'PostController')
         ->names('forum.post')
-        ->except(['create'])
-        ->middleware('verified', 'auth');
+        ->except(['create']);
     Route::get('post/create/{id}', 'PostController@create')->name('forum.post.create');
 });
+
 Route::resource('/user','User\UserController')->names('user');
+
 Route::get('/search', 'Forum\SearchController')->name('search');
 

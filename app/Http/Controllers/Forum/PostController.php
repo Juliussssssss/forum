@@ -37,12 +37,15 @@ class PostController extends Controller
         $this->forumPostRepository = app(ForumPostRepository::class);
         $this->forumCommentRepository = app(ForumCommentRepository::class);
         $this->forumCategoryRepository = app(ForumCategoryRepository::class);
+
+        $this->middleware('auth')->only('show');
+        $this->middleware(['auth', 'verified'])->only('edit', 'update', 'create', 'store', 'destroy');
     }
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
@@ -54,13 +57,13 @@ class PostController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param $category_id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create($category_id)
     {
-        $item = new ForumPost();
-
-        $categoryName = $this->forumCategoryRepository->getName($category_id);
+        $item = new ForumPost();@
+        $categoryName = $this->forumCategoryRepository->getNameCategory($category_id);
 
         return view('forum.user.posts.post_add', compact('item', 'categoryName', 'category_id'));
     }
@@ -69,7 +72,7 @@ class PostController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(ForumPostCreateRequest $request)
     {
@@ -78,10 +81,12 @@ class PostController extends Controller
         $item = (new ForumPost())->create($data);
 
         if ($item->exists) {
+
             return redirect()
                 ->route('forum.post.show', $item->id)
                 ->with(['success' => 'Успешно добавленно']);
         } else {
+
             return back()->withErrors(['msg' => 'Ошибка сохранения'])
                 ->withInput();
         }
@@ -91,7 +96,7 @@ class PostController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show($id)
     {
@@ -105,16 +110,16 @@ class PostController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id)
     {
         $item = $this->forumPostRepository->getEdit($id);
-        if ($item->user_id != Auth::user()->id) {
-            return  abort(403, 'Доступ запрещен');
-        }
 
-        if (empty($item)) {
+        if (!($this->forumPostRepository->owner($id))) {
+
+            return  abort(403, 'Доступ запрещен');
+        } elseif (empty($item)) {
             abort(404);
         }
 
@@ -132,21 +137,24 @@ class PostController extends Controller
     {
         $item = $this->forumPostRepository->getEdit($id);
         $data = $request->all();
+
         if ($this->forumPostRepository->Owner($id)) {
             $result = $item->update($data);
 
             if ($result) {
+
                 return redirect()
                     ->route('forum.post.show', $item->id)
                     ->with(['success' => 'Успешно сохранено']);
             } else {
+
                 return back()
                     ->withErrors(['msg' => 'Ошибка сохранения'])
                     ->withInput();
             }
-        } else {
-            return abort(403, 'Доступ запрещен');
         }
+
+        return abort(403, 'Доступ запрещен');
     }
 
     /**
@@ -160,18 +168,16 @@ class PostController extends Controller
         if ($this->forumPostRepository->Owner($id)) {
             $result = ForumPost::destroy($id);
             if ($result) {
-
                 return redirect()
                     ->route('forum.categories')
                     ->with(['success' => 'Запись удалена']);
             } else {
-
                 return redirect()
                     ->route('forum.categories')
                     ->withErrors(['msg' => 'Ошибка удаления']);
             }
-        } else {
-            return abort(403, 'Доступ запрещен');
         }
+
+            return abort(403, 'Доступ запрещен');
     }
 }

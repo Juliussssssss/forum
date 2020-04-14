@@ -7,6 +7,11 @@
         @include('forum.user.profile.result_message')
         <div class="row">
             <div class="col-12">
+                @if (session('status'))
+                    <div class="alert alert-success" role="alert">
+                        {{ session('status') }}
+                    </div>
+                @endif
                 @if (session('resent'))
                     <div class="alert alert-success" role="alert">
                         {{ __('На ваш адрес электронной почты была отправлена ​​новая ссылка для подтверждения.') }}
@@ -31,12 +36,12 @@
                                     </div>
                                     <div class="d-flex">
                                         @if (empty($user->email_verified_at))
-                                            <form class="pb-4" method="POST" action="http://forum/email/resend">
+                                            <form class="pb-4 w-100" method="POST" action="http://forum/email/resend">
                                                 @csrf
                                                 <button type="submit" class="w-100 rounded-sm border-danger border d-block text-center text-danger">Почта не подтверждена, нажмите сюда для подтверждения</button>
                                             </form>
                                         @else
-                                            <div class="pb-4"><span class="rounded-sm d-block border border-success text-center text-success">Почта подтверждена</span></div>
+                                            <div class="pb-4 w-100"><span class="rounded-sm d-block border border-success text-center text-success">Почта подтверждена</span></div>
                                         @endif
                                     </div>
                                     <div class="d-flex py-4">
@@ -46,7 +51,11 @@
                                 </div>
                             </div>
                             <div class="col-12 justify-content-around d-flex pt-3">
-                                <a href="{{ route('user.edit', $user->id) }}" class="btn btn-outline-success">Сменить пароль</a>
+                                <form method="POST" action="{{ route('password.email') }}">
+                                    @csrf
+                                    <input type="hidden" name="email" id="email" value="{{ auth()->user()->email }}">
+                                    <button type="submit" class="btn btn-outline-success">Сменить пароль</button>
+                                </form>
                                 <a href="{{ route('user.edit', $user->id) }}" class="btn btn-outline-success">Сменить данные</a>
                                 <a href="{{ route('forum.post.index') }}" class="btn btn-outline-success">Мои темы</a>
                             </div>

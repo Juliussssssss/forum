@@ -4,6 +4,7 @@
 
 @section('content')
     <div class="container my-5">
+        @include('forum.user.result_message')
         <div class="row">
             <div class="col-12">
                 @if (empty($post))

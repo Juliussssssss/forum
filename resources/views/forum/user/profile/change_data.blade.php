@@ -18,8 +18,7 @@
                                        name="name"
                                        type="text"
                                        class="form-control"
-                                       placeholder="{{ $user->name }}">
-                                <label class="small">(От 5 до 20 символов)</label>
+                                       value="{{ $user->name }}">
                             </div>
                             <div class="form-group">
                                 <label for="email">Смена почты</label>
@@ -27,12 +26,14 @@
                                        name="email"
                                        type="text"
                                        class="form-control"
-                                       placeholder="{{ $user->email }}">
+                                       value="{{ $user->email }}">
                                 <label class="small">(При смене почты требуется заново ее подтвердить)</label>
                             </div>
-                            <div class="form-group">
-                                <label for="FormControlFile1">Новое фото</label>
-                                <input type="file" id="image" name="image" class="form-control-file">
+                            <div class="input-group mb-3">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="image" name="image">
+                                    <label class="custom-file-label" id="image" for="form-control-file">Выберете фото</label>
+                                </div>
                             </div>
                             <button class="btn btn-success" type="submit">Сохранить</button>
                         </form>
@@ -41,4 +42,5 @@
             </div>
         </div>
     </div>
+    <script src="{{ asset('/js/customInput.js') }}"></script>
 @endsection

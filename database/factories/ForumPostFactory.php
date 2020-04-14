@@ -5,15 +5,15 @@
 use App\Models\ForumPost;
 use Faker\Generator as Faker;
 
-$factory->define(\App\Models\ForumPost::class, function (Faker $faker) {
+$factory->define(ForumPost::class, function (Faker $faker) {
     $title = $faker->sentence(rand(3, 8), true);
-    $txt = $faker->realText(rand(1000, 4000));
+    $txt = $faker->realText(rand(100, 500));
     $is_published = rand(1, 5) > 1;
-    $craeted_at = $faker->dateTimeBetween('-3 months', '-2 days');
+    $created_at = $faker->dateTimeBetween('-3 months', '-2 days');
 
     $data = [
         'category_id' => rand(2, 11),
-        'user_id' => $faker->randomElement([1,2]),
+        'user_id' => rand(1,2),
         'title' => $title,
         'slug' => str_slug($title),
         'excerpt' => $faker->text(rand(40, 100)),
@@ -21,8 +21,8 @@ $factory->define(\App\Models\ForumPost::class, function (Faker $faker) {
         'content_html' => $txt,
         'is_published' => $is_published,
         'published_at' => $is_published ? $faker->dateTimeBetween('-2 months', '-1 days') : null,
-        'created_at' => $craeted_at,
-        'updated_at' => $craeted_at,
+        'created_at' => $created_at,
+        'updated_at' => $created_at,
     ];
 
     return $data;

@@ -32,20 +32,21 @@
                         <li class="list-group-item border">
                             <a class="pointer text-black-50" href="{{ route('forum.post.show', $post->id) }}">
                                 <h4 class="d-block font-weight-bold ">{{ $post->title }}</h4>
-                                <span class="d-block">{{ $post->description }}</span>
+                                <div class="d-flex justify-content-between flex-wrap">
+                                    <span class="d-block">Автор: {{ $post->user->name }}</span>
+                                    <span class="d-block">Опубликовано: {{ $post->published_at }}</span>
+                                </div>
                             </a>
                         </li>
                         @empty
                             <h5 class="pl-3 text-danger">Тем нету</h5>
                     @endforelse
                 </ul>
+                <div class="mt-2">{{ $answer['posts'] }}</div>
             </div>
             @endif
         </div>
     </div>
-    @if (!empty($posts))
-        @include('forum.user.posts.post_list')
-    @endif
     @if ($id>1)
         <div class="container mb-5">
             <div class="row">

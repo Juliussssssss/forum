@@ -66,7 +66,6 @@ class  PostController extends BaseController
     public function store(ForumPostCreateRequest $request)
     {
         $data = $request->input();
-
         $item = (new ForumPost())->create($data);
 
         if ($item) {
@@ -100,6 +99,7 @@ class  PostController extends BaseController
     public function edit($id)
     {
         $item = $this->forumPostRepository->getEdit($id);
+
         if (empty($item)) {
             abort(404);
         }
@@ -128,7 +128,6 @@ class  PostController extends BaseController
         }
 
         $data = $request->all();
-
         $result = $item->update($data);
 
         if ($result) {

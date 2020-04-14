@@ -24,7 +24,6 @@ class ForumCategoryRepository extends CoreRepository
      * Get panel for edit in admin
      *
      * @param int $id
-     *
      * @return Model
      */
     public function getEdit($id)
@@ -58,7 +57,6 @@ class ForumCategoryRepository extends CoreRepository
     /**get all categories with paginate
      *
      * @param int/null $perPage
-     *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
     public function getAllWithPaginate($perPage = null)
@@ -74,6 +72,12 @@ class ForumCategoryRepository extends CoreRepository
         return $result;
     }
 
+    /**
+     * get get child categories to display on start_page
+     *
+     * @param int $id
+     * @return mixed
+     */
     public function getCategoriesByParentId($id = 1)
     {
         $columns = ['id', 'title', 'description', 'parent_id'];
@@ -87,7 +91,13 @@ class ForumCategoryRepository extends CoreRepository
         return $result;
     }
 
-    public function getName($id)
+    /**
+     * get name category for create new post by user
+     *
+     * @param $id
+     * @return mixed
+     */
+    public function getNameCategory($id)
     {
         return $this
             ->startConditions()
@@ -97,6 +107,12 @@ class ForumCategoryRepository extends CoreRepository
             ->first();
     }
 
+    /**
+     * Get search result
+     *
+     * @param $string
+     * @return mixed
+     */
     public function getLike($string)
     {
         return $this

@@ -28,7 +28,7 @@ class CategoryController extends BaseController
      /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
@@ -40,7 +40,7 @@ class CategoryController extends BaseController
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
@@ -60,7 +60,6 @@ class CategoryController extends BaseController
     public function store(ForumCategoryCreateRequest $request)
     {
         $data = $request->input();
-
         $item = (new ForumCategory())->create($data);
 
         if ($item) {
@@ -119,8 +118,8 @@ class CategoryController extends BaseController
                 ->withErrors(['msg' => "Запись id=[{$id}] не найдена"])
                 ->withInput();
         }
-        $data = $request->all();
 
+        $data = $request->all();
         $result = $item->update($data);
 
         if ($result) {
@@ -138,7 +137,7 @@ class CategoryController extends BaseController
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
@@ -147,7 +146,7 @@ class CategoryController extends BaseController
         if ($result) {
             return redirect()
                 ->back()
-                ->with(['success' => 'Категория id=[$id] удалена']);
+                ->with(['success' => "Категория #{$id} удалена"]);
         } else {
             return back()->withErrors(['msg' => 'Ошибка удаления']);
         }

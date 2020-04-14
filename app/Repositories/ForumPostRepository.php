@@ -23,7 +23,8 @@ class ForumPostRepository extends CoreRepository
     /**
      * get all posts in admonostration with paginate
      *
-     * @return LengthAwarePaginator
+     * @param $id
+     * @return mixed
      */
     public function getAllWithPaginate($id) {
         $columns = [
@@ -45,6 +46,12 @@ class ForumPostRepository extends CoreRepository
         return $result;
     }
 
+    /**
+     * get all posts for start_page
+     *
+     * @param $id
+     * @return mixed
+     */
     public function getAllWithPaginateForUser($id) {
         $columns = [
             'id',
@@ -90,7 +97,7 @@ class ForumPostRepository extends CoreRepository
     public function getPostsWithCategory($id = 1)
     {
         $columns = [
-            'title', 'id', 'user_id'
+            'title', 'id', 'user_id', 'published_at'
         ];
 
         $result = $this
@@ -98,11 +105,17 @@ class ForumPostRepository extends CoreRepository
             ->select($columns)
             ->where('category_id', $id)
             ->with('category', 'user')
-            ->paginate(5);
+            ->paginate(15);
 
         return $result;
     }
 
+    /**
+     * get a post to display for the user
+     *
+     * @param null $id
+     * @return mixed
+     */
     public function getPost($id = null)
     {
         $columns = [
@@ -120,6 +133,12 @@ class ForumPostRepository extends CoreRepository
         return $result;
     }
 
+    /**
+     * Get search result
+     *
+     * @param $string
+     * @return mixed
+     */
     public function getLike($string)
     {
         return $this
@@ -131,7 +150,13 @@ class ForumPostRepository extends CoreRepository
             ->paginate(15);
     }
 
-    public function Owner($id)
+    /**
+     * check post owner
+     *
+     * @param $id
+     * @return bool
+     */
+    public function owner($id)
     {
         $owner = $this
             ->startConditions()
@@ -140,11 +165,10 @@ class ForumPostRepository extends CoreRepository
             ->get()
             ->first();
 
-        if($owner->user_id == auth()->user()->id) {
+        if($owner->user_id == auth()->user()->id || auth()->user()->is_admin == 1) {
             return true;
         } else {
             return false;
         }
-
     }
 }

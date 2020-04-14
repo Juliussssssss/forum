@@ -30,7 +30,7 @@
                                            type="text"
                                            name="name"
                                            id="name"
-                                           placeholder="{{ $item->name }}">
+                                           value="{{ $item->name }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Почта</label>
@@ -38,7 +38,7 @@
                                            type="text"
                                            name="email"
                                            id="email"
-                                           placeholder="{{ $item->email }}">
+                                           value="{{ $item->email }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Пароль</label>
@@ -46,7 +46,7 @@
                                            type="text"
                                            name="password"
                                            id="password"
-                                           placeholder="Пароль">
+                                           placeholder="Новый пароль">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="custom-file">
@@ -91,4 +91,5 @@
             </div>
         </div>
     </div>
+    <script src="{{ asset('/js/customInput.js') }}"></script>
 @endsection

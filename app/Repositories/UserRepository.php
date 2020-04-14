@@ -20,6 +20,12 @@ class UserRepository extends CoreRepository
         return Model::class;
     }
 
+    /**
+     * get user info for personal area
+     *
+     * @param $id
+     * @return mixed
+     */
    public function getUser($id)
    {
        $columns = [
@@ -36,6 +42,12 @@ class UserRepository extends CoreRepository
        return $result;
    }
 
+    /**
+     * Get user data for user edit in personal area
+     *
+     * @param $id
+     * @return mixed
+     */
    public function getEdit($id)
    {
        $columns = [
@@ -52,6 +64,12 @@ class UserRepository extends CoreRepository
        return $result;
    }
 
+    /**
+     * get user data for edit in admin panel
+     *
+     * @param $id
+     * @return mixed
+     */
    public function getEditForAdmin($id)
    {
        return $this
@@ -61,10 +79,16 @@ class UserRepository extends CoreRepository
            ->first();
    }
 
+    /**
+     * get all users in admin panel
+     *
+     * @param $id
+     * @return mixed
+     */
    public function getAllWithPaginate($id)
    {
        $columns = [
-           'id', 'name', 'created_at', 'email_verified_at', 'image'
+           'id', 'name', 'created_at', 'email_verified_at', 'image', 'email'
        ];
        return $this
            ->startConditions()
