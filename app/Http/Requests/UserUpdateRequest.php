@@ -39,7 +39,33 @@ class UserUpdateRequest extends FormRequest
                 'max:255',
                 Rule::unique('users')->ignore($this->route('user'))
                 ],
-            'image' => 'max:10240'
+            'image' => 'max:10240|mimes:jpeg,png,bmp,tiff'
+        ];
+    }
+
+    /**
+     * attributes for rules
+     *
+     * @return array
+     */
+    public function attributes()
+    {
+        return [
+            'name' => 'Имя',
+            'email' => 'Email',
+            'image' => 'Картинка',
+        ];
+    }
+
+    /**
+     * Get the error messages for the define validation rules
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'mimes' => 'Только jpeg, png, bmp, tiff файлы разрешены.'
         ];
     }
 }

@@ -5,7 +5,9 @@ $( document ).ready(function() {
         $('form').attr('action', 'http://forum/forum/comment');
         $('#post_id_answer').attr('value', $(event.target).attr('value'));
         var destination = $(form).offset().top;
-        $('html').animate({scrollTop: destination}, 1100);
+        $('html').animate( {
+            scrollTop: destination
+        }, 1100);
         $('#send').html('Ответить');
         $('#cancelAnswer').attr('hidden', false);
         $('#comment').html('');
@@ -18,7 +20,9 @@ $( document ).ready(function() {
         $('form').attr('action', 'http://forum/forum/comment/'+$(event.target).attr('value'));
         $("input[name = '_method']").attr('value', 'PATCH');
         var destination = $(form).offset().top;
-        $('html').animate({scrollTop: destination}, 1100);
+        $('html').animate( {
+            scrollTop: destination
+        }, 1100);
         $('#cancelEditing').attr('hidden', false);
         $('#send').html('Отредактировать');
         $('#comment').html($(event.target).parents('li').siblings().children('#commentContent').text());
@@ -41,48 +45,3 @@ $( document ).ready(function() {
     });
 
 });
-
-// window.onload = function () {
-//     let answer = document.getElementsByName('answer');
-//     let editing = document.getElementsByName('edit');
-//     let postAnswer = document.getElementById('post_id_answer');
-//     let send = document.getElementById('send');
-//     let cancelAnswer = document.getElementById('cancelAnswer');
-//     let cancelEditing = document.getElementById('cancelEditing');
-//     let form = document.getElementsByName('form');
-//     let deleteComment = document.getElementsByName('delete');
-//
-//     for (let button of answer) {
-//         button.addEventListener('click', function (event) {
-//             postAnswer.setAttribute('value', button.value);
-//             cancelAnswer.scrollIntoView({block: "center", behavior: "smooth"});
-//             cancelAnswer.hidden = false;
-//             send.innerHTML = 'Оветить';
-//         })
-//     }
-//
-//     for (let button of deleteComment) {
-//         button.addEventListener('click', function (event) {
-//             confirm('вы действительно хотите удалть свой комментарий ?');
-//
-//         })
-//     }
-//
-//     for (let button of editing) {
-//         button.addEventListener('click', function (event) {
-//             form.setAttribute('value', 'dfgsdf');
-//         })
-//     }
-//
-//     cancelEditing.onclick = function() {
-//         postAnswer.setAttribute('value', '');
-//         send.innerHTML = 'Редактировать';
-//         cancelAnswer.hidden = true;
-//     };
-//
-//     cancelAnswer.onclick = function() {
-//         postAnswer.setAttribute('value', '');
-//         send.innerHTML = 'Отправить';
-//         cancelAnswer.hidden = true;
-//     };
-// };

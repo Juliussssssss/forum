@@ -80,17 +80,6 @@ class  PostController extends BaseController
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -154,7 +143,7 @@ class  PostController extends BaseController
         if ($result) {
             return redirect()
                 ->back()
-                ->with(['success' => 'Запись id=[$id] удалена']);
+                ->with(['success' => "Запись {$id} удалена"]);
         } else {
             return back()->withErrors(['msg' => 'Ошибка удаления']);
         }

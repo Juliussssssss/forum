@@ -15,7 +15,7 @@
             <div class="card-body">
                 <div class="form-group">
                     <label for="title">Заголовок</label>
-                    <input name="title" value="{{ $item->title }}"
+                    <input name="title" value="{{ old('title', $item->title) }}"
                            id="title"
                            type="text"
                            class="form-control"

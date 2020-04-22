@@ -53,7 +53,7 @@ class UserController extends Controller
         $data = $request->all();
 
         if (!empty($request->image)) {
-            $path = $request->file('image')->store('uploads/user photo', 'public');
+            $path = $request->file('image')->store('uploads/userPhoto', 'public');
             $data['image'] = $path;
         }
 
@@ -67,17 +67,6 @@ class UserController extends Controller
             return back()->withErrors(['msg' => 'Ошибка сохранения'])
                 ->withInput();
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -107,7 +96,7 @@ class UserController extends Controller
         $data = $request->all();
 
         if (!empty($request->image)) {
-            $path = $request->file('image')->store('uploads/user photo', 'public');
+            $path = $request->file('image')->store('uploads/userPhoto', 'public');
             $data['image'] = $path;
         }
 

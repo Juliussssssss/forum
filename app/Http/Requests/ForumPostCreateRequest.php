@@ -41,14 +41,25 @@ class ForumPostCreateRequest extends FormRequest
     {
         return [
             'title.required' => 'Введите заголовок статьи',
+            'content_row.required' => 'Введите контент статьи',
             'content_row' => 'Минимальная длина статьи [:min] символов'
         ];
     }
 
+    /**
+     * attributes for rules
+     *
+     * @return array
+     */
     public function attributes()
     {
        return [
-           'title' => 'Заголовок'
+           'title' => 'Заголовок',
+           'slug' => 'Cтрока',
+           'excerpt' => 'Выдержка',
+           'content_row' => 'Контент',
+           'category_id' => 'категория'
+
        ];
     }
 }

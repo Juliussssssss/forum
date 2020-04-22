@@ -7,6 +7,7 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/carousel/">
     <!-- Bootstrap core CSS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="{{ asset('/js/confirmToDelete.js') }}"></script>
     <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/custom.css') }}" />
     <!-- Favicons -->

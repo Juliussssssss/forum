@@ -33,12 +33,12 @@
                                     </li>
                                     @if (Auth::user() && $post->user->name == Auth::user()->name)
                                         <li class="list-group-item justify-content-around d-flex">
-                                            <form method="POST" action="{{ route('forum.post.destroy', $post->id) }}">
+                                            <form method="POST" class="delete" action="{{ route('forum.post.destroy', $post->id) }}">
                                                 @method("DELETE")
                                                 @csrf
-                                                <button type="submit" class="btn btn-light btn-sm">Удалить</button>
+                                                <input type="submit" value="Удалить" class="btn btn-light border btn-sm">
                                             </form>
-                                            <a class="btn btn-light btn-sm" href="{{ route('forum.post.edit', $post->id) }}">Редактировать</a>
+                                            <a class="btn btn-light border btn-sm" href="{{ route('forum.post.edit', $post->id) }}">Редактировать</a>
                                         </li>
                                     @endif
                                 </ul>

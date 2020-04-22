@@ -36,4 +36,19 @@ class ForumCategoryUpdateRequest extends FormRequest
             'parent_id' => 'required|integer|exists:forum_categories,id'
         ];
     }
+
+    /**
+     * attributes for rules
+     *
+     * @return array
+     */
+    public function attributes()
+    {
+        return [
+            'title' => 'Заголовок',
+            'slug' => 'Строка',
+            'description' => 'Описание',
+            'parent_id' => 'Родитель',
+        ];
+    }
 }

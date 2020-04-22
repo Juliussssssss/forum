@@ -73,17 +73,6 @@ class CategoryController extends BaseController
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        dd(__METHOD__);
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id

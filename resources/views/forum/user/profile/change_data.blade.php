@@ -31,7 +31,7 @@
                             </div>
                             <div class="input-group mb-3">
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="image" name="image">
+                                    <input type="file" class="custom-file-input" id="image" name="image" accept="image/*">
                                     <label class="custom-file-label" id="image" for="form-control-file">Выберете фото</label>
                                 </div>
                             </div>

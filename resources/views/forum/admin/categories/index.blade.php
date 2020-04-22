@@ -51,10 +51,10 @@
                                         </a>
                                     </div>
                                     <div>
-                                        <form class="ml-2" method="POST" action="{{ route('forum.admin.categories.destroy', $category->id) }}">
+                                        <form class="ml-2 delete" method="POST" action="{{ route('forum.admin.categories.destroy', $category->id) }}">
                                             @method('DELETE')
                                             @csrf
-                                            <button type="submit" class="btn btn-danger m-0 px-1 py-0">x</button>
+                                            <input type="submit" value="x" class="btn btn-danger m-0 px-1 py-0">
                                         </form>
                                     </div>
                                 </div>

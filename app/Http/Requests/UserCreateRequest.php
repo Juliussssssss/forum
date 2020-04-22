@@ -27,7 +27,19 @@ class UserCreateRequest extends FormRequest
             'name' => 'min:5|max:20|required|unique:users|string',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
-            'image' => 'max:10240'
+            'image' => 'max:10240|mimes:jpeg,png,bmp,tiff'
+        ];
+    }
+
+    /**
+     * Get the error messages for the define validation rules
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'mimes' => 'Только jpeg, png, bmp, tiff файлы разрешены.'
         ];
     }
 }

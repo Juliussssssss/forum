@@ -36,38 +36,6 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -80,6 +48,7 @@ class UserController extends Controller
 
             return view('forum.user.profile.change_data', compact('user'));
         } else {
+
             return  abort(403, 'Доступ запрещен');
         }
     }
@@ -98,30 +67,21 @@ class UserController extends Controller
         $data = $request->all();
 
         if (!empty($request->image)) {
-            $path = $request->file('image')->store('uploads\user photo', 'public');
+            $path = $request->file('image')->store('uploads\userPhoto', 'public');
             $data['image'] = $path;
         }
 
         $result = $item->update($data);
 
         if ($result) {
+
             return redirect()
                 ->route('user.index')
                 ->with(['success' => 'Успешно сохранено']);
         } else {
+
             return back()
                 ->withInput();
         }
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

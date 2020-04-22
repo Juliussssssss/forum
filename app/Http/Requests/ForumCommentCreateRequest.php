@@ -27,4 +27,16 @@ class ForumCommentCreateRequest extends FormRequest
             'comment' => 'required|min:5|max:500',
         ];
     }
+
+    /**
+     * attributes for rules
+     *
+     * @return array
+     */
+    public function attributes()
+    {
+        return [
+            'comment' => 'Комментарий'
+        ];
+    }
 }

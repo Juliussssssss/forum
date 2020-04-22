@@ -35,10 +35,10 @@
                                         </div>
                                         @if (Auth::user() && $comment->user->name == Auth::user()->name || Auth::user()->is_admin == 1)
                                             <div class="col-6 col-sm-4 text-center">
-                                                <form method="POST" action="{{ route('forum.comment.destroy', $comment->id) }}">
+                                                <form method="POST" action="{{ route('forum.comment.destroy', $comment->id) }}" class="delete">
                                                     @method('DELETE')
                                                     @csrf
-                                                    <button type="submit" class="delete btn btn-light btn-sm border">Удалить</button>
+                                                    <input type="submit" value="Удалить" class="delete btn btn-light btn-sm border">
                                                 </form>
                                             </div>
                                             <div class="col-6 col-sm-4 text-center pt-sm-0 pt-2">

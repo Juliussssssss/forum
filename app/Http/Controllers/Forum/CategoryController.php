@@ -45,8 +45,7 @@ class CategoryController extends BaseController
     /**
      * show subsidiary category by id
      *
-     * @param  $id
-     *
+     * @param  $iв
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function showSubsidiaryCategories($id)

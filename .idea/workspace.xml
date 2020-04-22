@@ -136,6 +136,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\programs\OSPanel\domains\forum\public\js" />
       <recent name="D:\programs\OSPanel\domains\forum1\resources" />
       <recent name="D:\programs\OSPanel\domains\forum1\app" />
       <recent name="D:\programs\OSPanel\domains\forum1\app\Models" />
@@ -165,6 +166,7 @@
         </serviceView>
       </list>
     </option>
+    <option name="showServicesTree" value="false" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -181,7 +183,11 @@
       <workItem from="1586724028028" duration="957000" />
       <workItem from="1586725245613" duration="14325000" />
       <workItem from="1586853417372" duration="7862000" />
-      <workItem from="1586861667128" duration="11310000" />
+      <workItem from="1586861667128" duration="21126000" />
+      <workItem from="1586946947370" duration="8800000" />
+      <workItem from="1586962833242" duration="253000" />
+      <workItem from="1587027702046" duration="3765000" />
+      <workItem from="1587048291546" duration="1130000" />
     </task>
     <servers />
   </component>

@@ -8,17 +8,6 @@ use Carbon\Carbon;
 class ForumPostObserver
 {
     /**
-     * Handle the forum post "created" event.
-     *
-     * @param ForumPost $forumPost
-     * @return void
-     */
-    public function created(ForumPost $forumPost)
-    {
-
-    }
-
-    /**
      * Handle the forum post "creating" event.
      *
      * @param ForumPost $forumPost
@@ -36,17 +25,6 @@ class ForumPostObserver
     }
 
     /**
-     * Handle the forum post "updated" event.
-     *
-     * @param ForumPost $forumPost
-     * @return void
-     */
-    public function updated(ForumPost $forumPost)
-    {
-        //
-    }
-
-    /**
      * Handle the forum post "updating" event.
      *
      * @param ForumPost $forumPost
@@ -57,40 +35,6 @@ class ForumPostObserver
         $this->checkChangeCategory($forumPost);
         $this->setPublishedAt($forumPost);
         $this->setSlug($forumPost);
-    }
-
-
-    /**
-     * Handle the forum post "deleted" event.
-     *
-     * @param ForumPost $forumPost
-     * @return void
-     */
-    public function deleted(ForumPost $forumPost)
-    {
-        //
-    }
-
-    /**
-     * Handle the forum post "restored" event.
-     *
-     * @param ForumPost $forumPost
-     * @return void
-     */
-    public function restored(ForumPost $forumPost)
-    {
-        //
-    }
-
-    /**
-     * Handle the forum post "force deleted" event.
-     *
-     * @param ForumPost $forumPost
-     * @return void
-     */
-    public function forceDeleted(ForumPost $forumPost)
-    {
-        //
     }
 
     /**
@@ -114,7 +58,7 @@ class ForumPostObserver
      */
     protected function setUser(ForumPost $forumPost)
     {
-        $forumPost->user_id = auth()->id() ?? ForumPost::UNKNOWN_USER;
+        $forumPost->user_id = auth()->id();
     }
 
     /**

@@ -19,11 +19,11 @@
             <div class="card-body">
                 <div class="form-group">
                     <label for="title">Заголовок</label>
-                    <input name="title" value="{{ $item->title }}"
+                    <input name="title" value="{{ old('title', $item->title) }}"
                            id="title"
                            type="text"
                            class="form-control"
-                           minlength="3"
+                           minlength="5"
                            required>
                 </div>
                 <div class="form-group">
@@ -31,6 +31,8 @@
                     <textarea name="content_row"
                               id="content_row"
                               class="form-control"
+                              minlength="5"
+                              required
                               rows="20">{{ old('content_row', $item->content_row) }}</textarea>
                 </div>
                 <div class="form-group">
@@ -41,7 +43,7 @@
                            type="hidden"
                            readonly="readonly">
                     @if ($item->exists)
-                        <span>{{ $item->category->title }}</span>
+                        <span>{{ $item->category['title'] }}</span>
                     @else
                         <span>{{ $categoryName->title }}</span>
                     @endif

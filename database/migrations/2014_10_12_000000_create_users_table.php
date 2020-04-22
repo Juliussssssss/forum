@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->tinyInteger('is_admin')->default(0);
             $table->tinyInteger('is_banned')->default(0);
-            $table->string('image')->default('uploads/user photo/1604ed7b020dfd7c616e0383e0bab2c8.png');
+            $table->string('image')->default('uploads/userPhoto/WdkIpFiOsffpObNNkH2M7UZ6cnGFk6g71nkq9Yos.png');
             $table->rememberToken();
             $table->timestamps();
         });

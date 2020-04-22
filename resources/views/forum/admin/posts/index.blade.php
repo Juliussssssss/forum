@@ -4,8 +4,8 @@
 
 @section('content')
     <div class="container my-5">
+        @include('forum.admin.result_message')
         <div class="row justify-content-center">
-            @include('forum.admin.result_message')
             <div class="col-12"><h3>Редактирование постов</h3></div>
             <div class="col-12">
                 @foreach($posts as $post)
@@ -33,10 +33,10 @@
                                 </a>
                             </div>
                             <div>
-                                <form class="ml-2" method="POST" action="{{ route('forum.admin.users.destroy', $post->id) }}">
+                                <form class="ml-2 delete" method="POST" action="{{ route('forum.admin.posts.destroy', $post->id) }}">
                                     @method('DELETE')
                                     @csrf
-                                    <button type="submit" class="btn btn-danger m-0 px-1 py-0">x</button>
+                                    <input type="submit" value="x" class="btn btn-danger m-0 px-1 py-0">
                                 </form>
                             </div>
                         </div>
@@ -48,7 +48,11 @@
                                 </div>
                                 <div class="col-4">
                                     <strong>Категория: </strong>
-                                    {{ $post->category->title }}
+                                    @if (empty($post->category['title']))
+                                        Удалена
+                                    @else
+                                        {{ $post->category['title']}}
+                                    @endif
                                 </div>
                                 <div class="col-5">
                                     <strong>Опубликована: </strong>

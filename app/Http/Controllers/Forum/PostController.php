@@ -77,7 +77,6 @@ class PostController extends Controller
     public function store(ForumPostCreateRequest $request)
     {
         $data = $request->input();
-
         $item = (new ForumPost())->create($data);
 
         if ($item->exists) {
@@ -168,10 +167,12 @@ class PostController extends Controller
         if ($this->forumPostRepository->Owner($id)) {
             $result = ForumPost::destroy($id);
             if ($result) {
+                
                 return redirect()
                     ->route('forum.categories')
                     ->with(['success' => 'Запись удалена']);
             } else {
+
                 return redirect()
                     ->route('forum.categories')
                     ->withErrors(['msg' => 'Ошибка удаления']);

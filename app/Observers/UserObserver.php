@@ -4,6 +4,7 @@ namespace App\Observers;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserObserver
 {
@@ -52,7 +53,7 @@ class UserObserver
     {
         $this->setImage($request);
         $this->setPassword($request);
-        $this->setEmailVerificationAdmin($request);
+        $this->setEmail($request);
     }
 
     /**
@@ -61,14 +62,12 @@ class UserObserver
      * @param User $request
      * @return void
      */
-    public function setEmailVerificationAdmin(User $request)
+    public function setEmail(User $request)
     {
         if ($this->unsetTime == $request->email_verified_at) {
             $request->email_verified_at = Null;
-        } elseif ($this->setTime == $request->email_verified_at && empty($request->email_verified_at)) {
+        } elseif ($this->setTime == $request->email_verified_at) {
             $request->email_verified_at = Carbon::now();
-        } else {
-            $request->email_verified_at = $request->getOriginal('email_verified_at');
         }
     }
 
@@ -81,11 +80,22 @@ class UserObserver
     public function setPassword(User $request)
     {
         if(!$request->password) {
-            $request->password = Hash::make($request->password);
+            $this->hashPass($request);
         } else {
             $request->password = $request->getOriginal('password');
         }
     }
+
+    /**
+     * hash user pass
+     *
+     * @param User $request
+     * @return void
+     */
+    public function hashPass(User $request) {
+        $request->password = Hash::make($request->password);
+    }
+
 
     /**
      * set original photo
@@ -95,8 +105,10 @@ class UserObserver
      */
     public function setImage(User $request)
     {
-        if (!$request->image)
-            $request->image = $request->getOriginal('image');
+        if ($request->image != $request->getOriginal('image') && $request->getOriginal('image') != 'uploads/userPhoto/WdkIpFiOsffpObNNkH2M7UZ6cnGFk6g71nkq9Yos.png')
+        {
+            Storage::disk('public')->delete($request->getOriginal('image'));
+        }
     }
 
     /**

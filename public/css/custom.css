@@ -90,6 +90,11 @@ ul {
 .pagination {
     margin: 0px;
 }
+.myImg {
+    object-fit: cover;
+    max-width: 500px;
+    max-height: 500px;
+}
 
 
 /* RESPONSIVE CSS

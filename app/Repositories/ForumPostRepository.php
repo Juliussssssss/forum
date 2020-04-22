@@ -104,6 +104,7 @@ class ForumPostRepository extends CoreRepository
             ->startConditions()
             ->select($columns)
             ->where('category_id', $id)
+            ->whereNotNull('published_at')
             ->with('category', 'user')
             ->paginate(15);
 
